@@ -13,6 +13,11 @@
     </head>
     <body>
         <h1>Hello <%=request.getParameter( "email" )%> </h1>
-        You are now logged in as a customer of our wonderful site.
+        <a href="FrontController?command=createorderlink">New Order</a> 
+        <a href="FrontController?command=vieworders">View Orders</a>
+        
+        <form action="Logout" method="post" class="button">
+        <input type="submit" value="Log Out">
+        </form>  
     </body>
 </html>

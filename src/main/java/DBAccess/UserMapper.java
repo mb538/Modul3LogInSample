@@ -20,7 +20,7 @@ public class UserMapper {
     public static void createUser( User user ) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO Users (email, password, role) VALUES (?, ?, ?)";
+            String SQL = "INSERT INTO users (email, password, role) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
             ps.setString( 1, user.getEmail() );
             ps.setString( 2, user.getPassword() );
@@ -38,7 +38,7 @@ public class UserMapper {
     public static User login( String email, String password ) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT id, role FROM Users "
+            String SQL = "SELECT id, role FROM users "
                     + "WHERE email=? AND password=?";
             PreparedStatement ps = con.prepareStatement( SQL );
             ps.setString( 1, email );
@@ -57,5 +57,22 @@ public class UserMapper {
             throw new LoginSampleException(ex.getMessage());
         }
     }
-
+    public static void updateUser (User user) throws LoginSampleException{
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE users SET email = ?, password = ? WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement( SQL );
+            
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
+            ps.setInt(3, user.getId());
+            
+            ps.executeUpdate();
+            }
+        catch ( ClassNotFoundException | SQLException ex ) {
+            throw new LoginSampleException(ex.getMessage());
+        }
+      
+    }
+            
 }

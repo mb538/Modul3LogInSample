@@ -12,8 +12,11 @@
         <title>Employee home page</title>
     </head>
     <body>
+        <a href="FrontController?command=viewcustomerorders">View Customer Orders</a> 
+        <h1>Hello <%=request.getParameter("email")%> </h1>
         
-        <h1>Hello <%=request.getParameter( "email")%> </h1>
-        You are now logged in as a EMPLOYEE of our wonderful site.
+        <form action="Logout" method="post" class="button">
+        <input type="submit" value="Log Out">
+    </form>  
     </body>
 </html>
